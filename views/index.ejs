@@ -1,0 +1,29 @@
+<%- include('header.ejs') %>
+
+<div class="book-container"> 
+    <% for (let i = 0; i < books.length; i++) { %> 
+        <a class="book-ref" href="/book?id=<%= books[i].id %>" > 
+            <div class="book-item"> 
+                <h3><%= books[i].name %></h3>
+                <img src="<%= books[i].img %>" />
+                <div class="rating">
+                    <% for (let j = 0; j < 5; j++) { %> 
+                        <% if (j < books[i].rating) { %>
+                            <i class="fa-solid fa-star"></i>
+                        <% } else { %>
+                            <i class="fa-regular fa-star"></i>
+                        <% } %>
+                    <% }%>
+                </div>
+                <p><%= books[i].registered.toISOString().replace("T", " ").substring(0, 16) %></p>
+            </div>
+        </a>
+    <% } %>
+    <a class="create-link" href="/create">
+        <div class="create-book"> 
+            <i class="fa-regular fa-square-plus"></i>
+        </div>
+    </a>
+
+</div>
+<%- include('footer.ejs') %>

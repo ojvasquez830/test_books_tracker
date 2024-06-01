@@ -1,0 +1,26 @@
+<%- include('header.ejs') %>
+<form id="submit-form" action="/create" method="post">
+    <input class="block" type="text" id="title" name="title" placeholder="Book Title">
+    <input class="block" type="text" id="author" name="author" placeholder="Book Author">
+    <textarea id="desc" name="desc" placeholder="Book description..." rows="10" ></textarea>
+    <div class="stars-div">
+        <i id="star1" class="fa-solid fa-star"></i>
+        <i id="star2" class="fa-regular fa-star"></i>
+        <i id="star3" class="fa-regular fa-star"></i>
+        <i id="star4" class="fa-regular fa-star"></i>
+        <i id="star5" class="fa-regular fa-star"></i>
+    </div>
+    <input type="hidden" id="rating" name="rating" value="1">
+    <input class="note-input" type="text" id="note1" name="note1" placeholder="Insert a note here">
+    <button id="add-note" class="note-button" type="button"><i class="fa-solid fa-square-plus"></i></button>
+    <input class="full-width button-style" type="submit" value="Create">
+</form>
+
+<script>
+    var edit = true;
+    var noteCount = 1;
+    var minVal = 1;
+</script>
+<script src="create.js"></script>
+
+<%- include('footer.ejs') %>

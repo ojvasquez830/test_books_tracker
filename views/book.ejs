@@ -1,0 +1,53 @@
+<%- include('header.ejs') %>
+<div class="book-root-div">
+<form id="submit-form" action="/edit/book/<%= book.id %>" method="post">
+<h1> <%= book.name %> </h1>
+<p> <%= book.registered.toISOString().replace("T", " ").substring(0, 16) %> </p>
+<div class="img-desc-div">
+<img class="book-img" src="<%= book.img %>">
+<div class="book-desc-div display-element">
+<p><%= book.description %></p>
+</div>
+<textarea id="desc" name="desc" class ="hidden edit-element" placeholder="Book description..." rows="10" ><%= book.description %></textarea>
+</div>
+<div class="stars-div">
+<% for (let j = 0; j < 5; j++) { %> 
+    <% if (j < book.rating) { %>
+        <i id="star<%=j+1%>" class="fa-solid fa-star"></i>
+    <% } else { %>
+        <i id="star<%=j+1%>" class="fa-regular fa-star"></i>
+    <% } %>
+<% }%>
+<input type="hidden" id="rating" name="rating" value="<%= book.rating %>">
+</div>
+<ul class="display-element">
+    <% for (let i = 0; i < notes.length; i++) { %>
+        <li> <%= notes[i].text %> </li>
+    <% } %>
+</ul>
+
+<% for (let i = 0; i < notes.length; i++) { %>
+    <input class="hidden edit-element note-input" type="text" id="note<%=i + 1%>" name="note<%=i + 1%>" placeholder="Insert a note here" value="<%=notes[i].text%>">
+    <% if (i != 0) { %>
+        <button onclick="removeNote('<%= i + 1 %>')" class="hidden edit-element note-button" id="remove-note<%= i + 1 %>" type="button"><i class="fa-solid fa-trash-can"></i></button>
+    <% } %>
+<% } %>
+<button id="add-note" class="hidden edit-element note-button" type="button"><i class="fa-solid fa-square-plus"></i></button>
+<input class="button-style-green  hidden edit-element full-width button-style" type="submit" value="Update">
+
+<button type="button" class="button-style-yellow button-style display-element" onclick="enterEditMode()">Edit</button>
+<button  type="button" class="button-style display-element" onclick="deleteBook()">Delete</button>
+</form>
+</div>
+
+<script>
+    var bookId = '<%= book.id %>'; // test is now a valid js object
+    var edit = false;
+    var noteCount = <%= notes.length %>;
+    var minVal = <%= book.rating %>;
+</script>
+<script src="book.js"></script>
+<script src="create.js"></script>
+
+
+<%- include('footer.ejs') %>

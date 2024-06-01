@@ -1,0 +1,26 @@
+<%- include('header.ejs') %>
+<form id="submit-form" action="/create" method="post">
+    <input class="block" type="text" id="title" name="title" placeholder="Book Title" value="<%= book.name %>">
+    <textarea id="desc" name="desc" placeholder="Book description..." rows="10" ><%= book.description %></textarea>
+    <div class="stars-div">
+        <% for (let j = 0; j < 5; j++) { %> 
+            <% if (j < book.rating) { %>
+                <i id="star<%= j + 1 %>" class="fa-solid fa-star"></i>
+            <% } else { %>
+                <i id="star<%= j + 1 %>" class="fa-regular fa-star"></i>
+            <% } %>
+        <% }%>
+    </div>
+    <input type="hidden" id="rating" name="rating" value="1">
+    <% for (let j = 0; j < notes.length; j++) { %> 
+        <input class="note-input" type="text" id="note<%= j + 1 %>" name="note<%= j + 1%>" placeholder="Insert a note here">
+        <button class="note-button" id="remove-note<%= j + 1 %>" type="button"><i class="fa-solid fa-trash-can"></i></button>
+    <% }%>
+    <div class="not-here"></div>
+    <button id="add-note" class="note-button add-note" type="button"><i class="fa-solid fa-square-plus"></i></button>
+    <input class="full-width button-style" type="submit">
+</form>
+
+<script src="create.js"></script>
+
+<%- include('footer.ejs') %>
